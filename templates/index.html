@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Index
+{% endblock %}
+
+{% block div %}
+<div class="header">
+    <div class="search-container">
+        <input type="text" placeholder="Buscar Archivos">
+        <button>Filtrar</button>
+    </div>
+</div>
+<div class="welcome-message">Bienvenido a LEJ</div>
+<div class="file-list">
+    <h2>Archivos</h2>
+        
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se agregarán los archivos en teoría -->
+           {% for archivo in archivos %}
+           <tr>
+            <td>{{ archivo.NombreArchivo }}</td>
+            <td>{{archivo.FechaSubida }}</td>
+            {% if archivo.TipoArchivo == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" %}
+            <td>word</td>
+            {% elif archivo.TipoArchivo == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" %}
+            <td>Excel</td>
+            {% elif archivo.TipoArchivo == "application/x-zip-compressed" %}
+            <td>archivo_Comprimido</td>
+            {% else %}
+            <td>{{archivo.TipoArchivo}}</td>
+            {%endif%}
+        </tr>
+           {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="/static/CSS/si.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>LEJ</h2>
+            <div class="company-name">Menu</div>
+            <ul>
+                <li><a href="/">Página principal</a></li>
+                <li><a href="/subirArchivo">Subir archivo</a></li>
+                <li><a href="#">Ver recientes</a></li>
+                <li><a href="#">Configuración</a></li>
+                <li class="logout"><a href="/logout">Cerrar sesión</a></li>
+
+            </ul>
+        </div>
+        <div class="main-content">
+            {% block div %}{% endblock %}
+        </div>
+
+            
+</body>
+</html>

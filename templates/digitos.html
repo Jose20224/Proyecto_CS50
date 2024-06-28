@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Account</title>
+    <link rel="stylesheet" href="/static/CSS/styles.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="blue-side"></div>
+        <div class="form-container activate-form">
+            <h1>Activate Account</h1>
+            <form action="/digitos" method="post">
+                <div class="input-box">
+                    <input type="text" required name="digitos">
+                    <label>Code</label>
+                </div>
+                <div class="error-message">
+                    {% if error %}
+                        {{ error }}
+                    {% endif %}
+                </div>
+                <button type="submit" class="action-btn verify-btn">Verify</button>
+                <a href="/login" class="action-btn back-btn">Back</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
