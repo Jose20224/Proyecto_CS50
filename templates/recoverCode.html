@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recover</title>
+    <link rel="stylesheet" href="/static/CSS/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="blue-side"></div>
+        <div class="form-container">
+            <h1>Recuperar Contraseña</h1>
+            <form accept="/recoverCode" method="post">
+                <div class="input-box">
+                    <input type="text" required name="code">
+                    <label>Inserte el nuevo codigo que fue enviado a su correo</label>
+                </div>
+                <div class="error-message">
+                    {{ error }} 
+                </div>
+                <button type="submit" class="action-btn">Comprobar Codigo</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

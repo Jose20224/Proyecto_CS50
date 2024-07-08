@@ -3,46 +3,77 @@
 {% block title %}
 Index
 {% endblock %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 {% block div %}
-<div class="header">
-    <div class="search-container">
-        <input type="text" placeholder="Buscar Archivos">
-        <button>Filtrar</button>
+<div class="index-header">
+    <div class="index-search-container">
+        <input type="text" placeholder="Buscar Archivos" class="search-input form-control" id="searchInput"
+            onkeyup="buscarArchivos()">
+        <button class="filter-button btn btn-primary" onclick="buscarArchivos()">Filtrar</button>
     </div>
 </div>
-<div class="welcome-message">Bienvenido a LEJ</div>
-<div class="file-list">
+<div class="index-welcome-message">Bienvenido a LEJ</div>
+<div class="index-file-list">
     <h2>Archivos</h2>
-        
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Fecha</th>
-                <th>Tipo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Aquí se agregarán los archivos en teoría -->
-           {% for archivo in archivos %}
-           <tr>
-            <td>{{ archivo.NombreArchivo }}</td>
-            <td>{{archivo.FechaSubida }}</td>
-            {% if archivo.TipoArchivo == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" %}
-            <td>word</td>
-            {% elif archivo.TipoArchivo == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" %}
-            <td>Excel</td>
-            {% elif archivo.TipoArchivo == "application/x-zip-compressed" %}
-            <td>archivo_Comprimido</td>
-            {% else %}
-            <td>{{archivo.TipoArchivo}}</td>
-            {%endif%}
-        </tr>
-           {% endfor %}
-        </tbody>
-    </table>
-</div>
-</div>
+    <div class="row ">
+        {% for archivo in archivos %}
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+            <div class="card text-bg-light" style="width: 18rem;">
+                <div class="mango">
+                    <img src="{{ url_for('imagen_formato', formato=archivo.formatoAchi) }}" alt="Formato">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ archivo.formatoAchi }}</h5>
+                    <h6>Nombre</h6>
+                    <p class="card-text">{{ archivo.NombreArchivo }}</p>
+                    <h6>Fecha</h6>
+                    <span class="card-title">{{ archivo.FechaSubida }}</span>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            opciones
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>{% if (archivo.formatoAchi == "txt" or archivo.formatoAchi == "Imagen" or
+                                archivo.formatoAchi == "PDF")%}
+                                <a class="dropdown-item" href="#" onclick="mostrarArchivo({{ archivo.ID }})">Ver</a>
+                                {%endif%}
+                            </li>
+                            <li><a class="dropdown-item" href="/archivo/{{ archivo.ID }}/descargar">Descargar</a></li>
+                            <li> <a class="dropdown-item" href="#" onclick="eliminarArchivo({{ archivo.ID }})">Eliminar</a></li>
+                            <li> <a class="dropdown-item" href="#" onclick="cambiarNombreArchivo({{ archivo.ID }})">Cambiar Nombre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-{% endblock %}
+
+    <!-- Modal -->
+    <div class="modal" id="archivoModal" tabindex="-1" role="dialog" aria-labelledby="archivoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="archivoModalLabel">Contenido del Archivo</h5>
+                    <button type="button" class="close" onclick="cerrarModal()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="archivoContenido"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block scripts %}
+    <script src="/static/JS/comandos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    {% endblock %}

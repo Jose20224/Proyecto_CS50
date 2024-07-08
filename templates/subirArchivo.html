@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    Subir Archivos
 {% endblock %}
 
 {% block div %}
@@ -12,28 +12,12 @@
             <p>Arrastra y suelta tus archivos aquí o</p>
             <button onclick="document.getElementById('file-input').click()">Seleccionar archivos</button>
             <form id="file-form" action="/subirArchivo" method="POST" enctype="multipart/form-data">
-                <input type="file" id="file-input" name="file" onchange="this.form.submit()">
+                <input type="file" id="file-input" name="file" onchange="validateFileAndSubmit()">
             </form>
         </div>
+        <p class="rojo">{{error}}</p>
     </div>
 </div>
 
-
-<script>
-    const dropArea = document.getElementById('drop-area');
-    dropArea.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        dropArea.style.borderColor = 'green';
-    });
-    dropArea.addEventListener('dragleave', () => {
-        dropArea.style.borderColor = '#ccc';
-    });
-    dropArea.addEventListener('drop', (event) => {
-        event.preventDefault();
-        dropArea.style.borderColor = '#ccc';
-        const files = event.dataTransfer.files;
-        document.getElementById('file-input').files = files;
-        document.getElementById('file-form').submit();
-    });
-</script>
+<script src="/static/JS/subirArchivos.js"></script>
 {% endblock %}

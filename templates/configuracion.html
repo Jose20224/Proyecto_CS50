@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Configuración
+{% endblock %}
+
+{% block div %}
+<div class="configuracion-container">
+    <h2>Configuración de Usuario</h2>
+    <form action="/configuracion" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="username">Cambiar nombre de usuario:</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ userName }}" required>
+        </div>
+    
+        <div class="form-group">
+            <h5>Foto actual</h5>
+            <img class="foto" src="{{ url_for('perfil_foto') }}" alt="Foto de perfil">
+            <br>
+            <label for="profile-picture">Cambiar foto de perfil:</label>
+            <input type="file" class="form-control-file" id="profile-picture" name="profile_picture">
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-secondary" id="change-password-button">Cambiar contraseña</button>
+        </div>
+
+        <div id="change-password-container" style="display: none;">
+            <div class="form-group">
+                <label for="current-password">Contraseña actual:</label>
+                <input type="password" class="form-control" id="current-password" name="current_password">
+            </div>
+
+            <div class="form-group">
+                <label for="new-password">Nueva contraseña:</label>
+                <input type="password" class="form-control" id="new-password" name="new_password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirmar nueva contraseña:</label>
+                <input type="password" class="form-control" id="confirm-password" name="confirm_password">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('change-password-button').addEventListener('click', function() {
+    var container = document.getElementById('change-password-container');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+});
+</script>
+{% endblock %}

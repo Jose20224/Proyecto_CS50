@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recover</title>
+    <link rel="stylesheet" href="/static/CSS/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="blue-side"></div>
+        <div class="form-container">
+            <h1>Recuperar Contraseña</h1>
+            <form accept="/recover" method="post">
+                <div class="input-box">
+                    <input type="password" required name="password">
+                    <label>Nueva Contraseña</label>
+                </div>
+                <div class="input-box">
+                    <input type="password" required name="confir_password">
+                    <label>Confirmar Contraseña</label>
+                </div>
+                <div class="input-box">
+                    <input type="text" required name="code">
+                    <label>Ingrese su codigo de activacion</label>
+                </div>
+                <div class="error-message">
+                    {{ error }} 
+                </div>
+                <a href="/recoverCode/{{ mail }}" class="forgot-password">Did you forget the code?</a>
+                <button type="submit" class="action-btn">Cambiar Contraseña</button>
+                <a href="/login" class="action-btn back-btn">Back</a>
+            </form>
+        </div>
+    </div>
+    <script src="/static/JS/comando_registro.js"></script>
+</body>
+</html>
